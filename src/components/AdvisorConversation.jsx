@@ -177,7 +177,7 @@ export function AdvisorConversation({
                     <article key={area.name}>
                       {area.preview?.image || area.imageLoading ? (
                         <figure className={area.imageLoading ? 'is-loading' : ''}>
-                          {area.preview?.image ? <img src={area.preview.image} alt={area.preview.imageAlt} /> : null}
+                          {area.preview?.image ? <img src={area.preview.image} alt={area.preview.imageAlt} referrerPolicy="origin" /> : null}
                           {area.preview?.photoAttributions?.length ? (
                             <figcaption>Photo: {area.preview.photoAttributions.map((author) => author.name).join(', ')}</figcaption>
                           ) : null}
@@ -198,7 +198,7 @@ export function AdvisorConversation({
                   {message.data.recommendedPlaces.map((place) => (
                     <article key={place.id}>
                       <div className="advisor-place-results__image">
-                        {place.image ? <img src={place.image} alt={place.imageAlt || place.name} /> : <span><MapPin size={19} aria-hidden="true" /></span>}
+                        {place.image ? <img src={place.image} alt={place.imageAlt || place.name} referrerPolicy="origin" /> : <span><MapPin size={19} aria-hidden="true" /></span>}
                       </div>
                       <div>
                         <span>{place.category}</span>

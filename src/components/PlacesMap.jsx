@@ -228,7 +228,7 @@ export function PlacesMap({ places, selectedId, onSelect, destinationName, cente
       {error || mapError ? <div className="places-map__state places-map__state--error">Map unavailable until Google Places is configured.</div> : null}
       {selected ? (
         <div className="map-preview">
-          {selected.image ? <img src={selected.image} alt="" /> : <span className="map-preview__fallback" />}
+          {selected.image ? <img src={selected.image} alt="" referrerPolicy="origin" /> : <span className="map-preview__fallback" />}
           <div><strong>{selected.name}</strong>{previewMeta.length ? <span>{previewMeta.join(' · ')}</span> : null}</div>
           <button type="button" aria-label="Close map preview" onClick={() => onSelect(null)}><X size={16} /></button>
         </div>

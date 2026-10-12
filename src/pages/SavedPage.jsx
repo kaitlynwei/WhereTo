@@ -41,7 +41,7 @@ function TripPlaceIndex({ places, mapPlaces, selectedId, pendingIds, onSelect, o
                 aria-expanded={selected}
               >
                 <span className="trip-place-index__number" aria-label={markerNumber ? `Map marker ${markerNumber}` : 'Not plotted'}>{markerNumber ?? '–'}</span>
-                {place.image ? <img src={place.image} alt="" /> : <span className="trip-place-index__image-fallback" />}
+                {place.image ? <img src={place.image} alt="" referrerPolicy="origin" /> : <span className="trip-place-index__image-fallback" />}
                 <span className="trip-place-index__name"><strong>{place.name}</strong><small>{meta.join(' · ') || place.destination}</small></span>
                 <ChevronDown size={15} aria-hidden="true" />
               </button>

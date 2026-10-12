@@ -96,7 +96,7 @@ export function ProfilePage() {
                 <div className="profile-saved-strip">
                   {detailedPlaces.slice(0, 3).map((place) => (
                     <a href={place.href ?? '#trip'} key={place.id} aria-label={`Open ${place.name}`}>
-                      {place.image ? <img src={place.image} alt={place.imageAlt ?? place.name} /> : <span className="profile-saved__image-fallback" />}
+                      {place.image ? <img src={place.image} alt={place.imageAlt ?? place.name} referrerPolicy="origin" /> : <span className="profile-saved__image-fallback" />}
                       <span>{place.name}</span>
                     </a>
                   ))}

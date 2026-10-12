@@ -24,7 +24,7 @@ function RecommendationCard({ place, destination, tripId, pending, onSave }) {
     <article className="trip-discovery-card">
       <a href={destinationHref(destination, tripId)} aria-label={`Explore ${place.name} in ${destination.name}`}>
         <figure>
-          {place.image ? <img src={place.image} alt={place.imageAlt || place.name} /> : <span className="trip-discovery-card__fallback"><Compass size={20} /></span>}
+          {place.image ? <img src={place.image} alt={place.imageAlt || place.name} referrerPolicy="origin" /> : <span className="trip-discovery-card__fallback"><Compass size={20} /></span>}
           {attribution ? <figcaption>Photo: {attribution.name}</figcaption> : null}
         </figure>
         <div>

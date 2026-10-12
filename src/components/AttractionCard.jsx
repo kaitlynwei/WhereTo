@@ -109,7 +109,7 @@ export function AttractionCard({ attraction, selected, isSaved, isSaving = false
     <article className={`attraction-card${selected ? ' attraction-card--selected' : ''}`}>
       <button className="attraction-card__main" type="button" onClick={onSelect} aria-pressed={selected} aria-expanded={selected} aria-controls={detailsId}>
         <div className="attraction-card__image">
-          {attraction.image ? <img src={attraction.image} alt={attraction.imageAlt ?? attraction.name} loading="lazy" /> : <span aria-hidden="true" />}
+          {attraction.image ? <img src={attraction.image} alt={attraction.imageAlt ?? attraction.name} loading="lazy" referrerPolicy="origin" /> : <span aria-hidden="true" />}
           {attraction.photoAttributions?.length ? (
             <small className="photo-attribution">
               Photo: {attraction.photoAttributions.map((author, index) => (
