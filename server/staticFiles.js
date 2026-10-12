@@ -18,7 +18,10 @@ const contentTypes = new Map([
 ]);
 
 const staticSecurityHeaders = {
-  'Referrer-Policy': 'same-origin',
+  // Google Places photo requests use the page origin to validate the
+  // browser-restricted Maps key. Send only the origin cross-site; never the
+  // route, query, or hash.
+  'Referrer-Policy': 'strict-origin-when-cross-origin',
   'X-Content-Type-Options': 'nosniff',
   'X-Frame-Options': 'DENY',
 };

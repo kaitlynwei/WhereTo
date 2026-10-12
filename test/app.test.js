@@ -42,6 +42,7 @@ test('production server serves built assets and keeps unknown API routes as JSON
       assert.equal(home.status, 200);
       assert.match(await home.text(), /WhereTo/);
       assert.equal(home.headers.get('cache-control'), 'no-cache');
+      assert.equal(home.headers.get('referrer-policy'), 'strict-origin-when-cross-origin');
 
       const asset = await fetch(`${baseUrl}/assets/index-abc123.js`);
       assert.equal(asset.status, 200);

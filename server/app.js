@@ -9,7 +9,7 @@ import { cleanItineraryPayload } from './itinerary.js';
 const securityHeaders = {
   'Cache-Control': 'no-store',
   'Content-Type': 'application/json; charset=utf-8',
-  'Referrer-Policy': 'same-origin',
+  'Referrer-Policy': 'strict-origin-when-cross-origin',
   'X-Content-Type-Options': 'nosniff',
 };
 
