@@ -1,8 +1,10 @@
+import { fileURLToPath } from 'node:url';
 import { createAdvisorService } from './advisor.js';
 import { createWhereToServer } from './app.js';
 import { readConfig } from './config.js';
 import { createOfficialPriceService } from './officialPrice.js';
 import { createItineraryService } from './itinerary.js';
+import { createStaticFileHandler } from './staticFiles.js';
 
 const config = readConfig();
 const advisor = createAdvisorService({
@@ -19,7 +21,8 @@ const itinerary = createItineraryService({
   model: config.openAiModel,
   timeoutMs: config.aiTimeoutMs,
 });
-const server = createWhereToServer({ config, advisor, itinerary, officialPrices });
+const staticFiles = createStaticFileHandler({ rootDir: fileURLToPath(new URL('../dist/', import.meta.url)) });
+const server = createWhereToServer({ config, advisor, itinerary, officialPrices, staticFiles });
 
 server.on('error', (error) => {
   if (error.code === 'EADDRINUSE') {

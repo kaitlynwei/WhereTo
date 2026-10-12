@@ -10,6 +10,7 @@ const boolean = (value, fallback = false) => {
 };
 
 export function readConfig(env = process.env) {
+  const nodeEnv = env.NODE_ENV?.trim() || 'development';
   const developmentOrigins = [
     'http://localhost:5173',
     'http://127.0.0.1:5173',
@@ -20,9 +21,9 @@ export function readConfig(env = process.env) {
     .filter(Boolean);
 
   return Object.freeze({
-    host: env.WHERETO_API_HOST?.trim() || '127.0.0.1',
-    port: integer(env.WHERETO_API_PORT, 8787, { min: 1, max: 65535 }),
-    nodeEnv: env.NODE_ENV?.trim() || 'development',
+    host: env.WHERETO_API_HOST?.trim() || (nodeEnv === 'production' ? '0.0.0.0' : '127.0.0.1'),
+    port: integer(env.PORT ?? env.WHERETO_API_PORT, 8787, { min: 1, max: 65535 }),
+    nodeEnv,
     openAiApiKey: env.OPENAI_API_KEY?.trim() || '',
     openAiModel: env.OPENAI_MODEL?.trim() || 'gpt-4o-mini',
     allowedOrigins: new Set(configuredOrigins.length ? configuredOrigins : developmentOrigins),

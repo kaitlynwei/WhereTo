@@ -22,6 +22,7 @@ The launcher reserves ports 5173 and 8787. If one is already occupied, close the
 - `npm run test:rules` — run the fake-user Firestore rules suite (requires a local Java runtime)
 - `npm run test:all` — run all three suites
 - `npm run build` — create the production frontend bundle
+- `npm start` — serve the production build and API together on one port
 
 ## Environment variables
 
@@ -76,7 +77,7 @@ The built-in limiter is suitable for local development and a single server insta
 
 No deployment is performed by this repository.
 
-1. Choose a host that can run the Node API and serve the Vite `dist` output, or use two services with a same-origin `/api` proxy.
+1. Choose a Node host, run `npm run build`, then use `npm start`; the server serves both the Vite `dist` output and `/api` from one origin.
 2. Add production environment variables in the host's secret/configuration settings.
 3. Publish `firestore.rules`.
 4. Add the production hostname to Firebase Authorized domains and Google key website restrictions.

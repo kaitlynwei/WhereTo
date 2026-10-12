@@ -1,18 +1,22 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { once } from 'node:events';
+import { mkdtemp, mkdir, rm, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import path from 'node:path';
 import { createWhereToServer } from '../server/app.js';
 import { readConfig } from '../server/config.js';
+import { createStaticFileHandler } from '../server/staticFiles.js';
 
 const silentLogger = { info() {}, warn() {}, error() {} };
 
-async function withServer(advisor, run, env = {}, officialPrices = null, itinerary = null) {
+async function withServer(advisor, run, env = {}, officialPrices = null, itinerary = null, staticFiles = null) {
   const config = readConfig({
     WHERETO_ALLOWED_ORIGINS: 'http://localhost:5173',
     WHERETO_RATE_LIMIT_MAX: '20',
     ...env,
   });
-  const server = createWhereToServer({ config, advisor, itinerary, officialPrices, logger: silentLogger });
+  const server = createWhereToServer({ config, advisor, itinerary, officialPrices, staticFiles, logger: silentLogger });
   server.listen(0, '127.0.0.1');
   await once(server, 'listening');
   const { port } = server.address();
@@ -23,6 +27,39 @@ async function withServer(advisor, run, env = {}, officialPrices = null, itinera
     await once(server, 'close');
   }
 }
+
+test('production server serves built assets and keeps unknown API routes as JSON', async () => {
+  const rootDir = await mkdtemp(path.join(tmpdir(), 'whereto-static-'));
+  try {
+    await mkdir(path.join(rootDir, 'assets'));
+    await writeFile(path.join(rootDir, 'index.html'), '<!doctype html><title>WhereTo</title>');
+    await writeFile(path.join(rootDir, 'assets', 'index-abc123.js'), 'console.log("WhereTo");');
+    const staticFiles = createStaticFileHandler({ rootDir });
+    const advisor = { configured: true, model: 'test-model', respond() {} };
+
+    await withServer(advisor, async (baseUrl) => {
+      const home = await fetch(`${baseUrl}/`, { headers: { Accept: 'text/html' } });
+      assert.equal(home.status, 200);
+      assert.match(await home.text(), /WhereTo/);
+      assert.equal(home.headers.get('cache-control'), 'no-cache');
+
+      const asset = await fetch(`${baseUrl}/assets/index-abc123.js`);
+      assert.equal(asset.status, 200);
+      assert.match(asset.headers.get('content-type'), /javascript/);
+      assert.match(asset.headers.get('cache-control'), /immutable/);
+
+      const clientRoute = await fetch(`${baseUrl}/trip`, { headers: { Accept: 'text/html' } });
+      assert.equal(clientRoute.status, 200);
+      assert.match(await clientRoute.text(), /WhereTo/);
+
+      const missingApi = await fetch(`${baseUrl}/api/missing`);
+      assert.equal(missingApi.status, 404);
+      assert.deepEqual((await missingApi.json()).error, 'Not found');
+    }, {}, null, null, staticFiles);
+  } finally {
+    await rm(rootDir, { recursive: true, force: true });
+  }
+});
 
 test('health endpoint reports configuration without exposing credentials', async () => {
   await withServer({ configured: true, model: 'test-model', respond() {} }, async (baseUrl) => {

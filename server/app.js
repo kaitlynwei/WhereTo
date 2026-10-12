@@ -95,7 +95,7 @@ function errorResponse(error) {
   return { status, message };
 }
 
-export function createWhereToServer({ config, advisor, itinerary = null, officialPrices = null, logger = console } = {}) {
+export function createWhereToServer({ config, advisor, itinerary = null, officialPrices = null, staticFiles = null, logger = console } = {}) {
   const limiter = createRateLimiter({ maxRequests: config.rateLimitMax, windowMs: config.rateLimitWindowMs });
   const priceLimiter = createRateLimiter({ maxRequests: Math.max(10, config.rateLimitMax), windowMs: config.rateLimitWindowMs });
 
@@ -116,6 +116,15 @@ export function createWhereToServer({ config, advisor, itinerary = null, officia
     const isItineraryRequest = url.pathname === '/api/itinerary';
     const isOfficialPriceRequest = url.pathname === '/api/official-price';
     if (!isAiRequest && !isItineraryRequest && !isOfficialPriceRequest) {
+      if (!url.pathname.startsWith('/api/') && staticFiles) {
+        try {
+          if (await staticFiles(request, response, url)) return;
+        } catch (error) {
+          logger.error?.('[WhereTo static]', { requestId, status: 500, error: error?.code ?? error?.name ?? 'Error' });
+          sendJson(response, 500, { error: 'The website could not be loaded.', requestId });
+          return;
+        }
+      }
       sendJson(response, 404, { error: 'Not found', requestId });
       return;
     }
