@@ -141,3 +141,9 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# Local UI review artifacts
+.impeccable/mocks/
+.impeccable/review/
+.impeccable/review-*/
+.impeccable/surfaces/

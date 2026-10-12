@@ -1,0 +1,324 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-27T10:47:37-05:00",
+  "title": "Design System: WhereTo",
+  "extensions": {
+    "colorMeta": {
+      "warm-ivory": {
+        "role": "neutral",
+        "displayName": "Warm Ivory",
+        "canonical": "#f3efe6",
+        "tonalRamp": ["#24211c", "#49433a", "#6e6658", "#938979", "#b7aa98", "#d8cdbc", "#ebe3d7", "#faf7f1"]
+      },
+      "paper-deep": {
+        "role": "neutral",
+        "displayName": "Deep Paper",
+        "canonical": "#e8e0d4",
+        "tonalRamp": ["#24211d", "#47423a", "#6a6358", "#8e8578", "#b1a699", "#d0c6b9", "#e5ddd1", "#f8f4ed"]
+      },
+      "paper-light": {
+        "role": "neutral",
+        "displayName": "Light Paper",
+        "canonical": "#faf7f0",
+        "tonalRamp": ["#25221d", "#4b463d", "#71695c", "#978d7c", "#bbb09d", "#d9d0c0", "#ece6da", "#fdfbf7"]
+      },
+      "ink": {
+        "role": "primary",
+        "displayName": "Editorial Ink",
+        "canonical": "#1d1d1a",
+        "tonalRamp": ["#171714", "#2e2e2a", "#494944", "#666660", "#85857e", "#a8a8a1", "#d0d0cb", "#f2f2ef"]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Weathered Ink",
+        "canonical": "#6b665e",
+        "tonalRamp": ["#1d1b18", "#393631", "#57524a", "#756f65", "#948d82", "#b5aea4", "#d8d2ca", "#f4f1ed"]
+      },
+      "taupe": {
+        "role": "neutral",
+        "displayName": "Travel Taupe",
+        "canonical": "#a99e8e",
+        "tonalRamp": ["#211e1a", "#423d35", "#635c51", "#857b6c", "#a99e8e", "#c4baad", "#ded6cc", "#f6f2ec"]
+      },
+      "stone": {
+        "role": "neutral",
+        "displayName": "Soft Stone",
+        "canonical": "#d8d0c4",
+        "tonalRamp": ["#23201c", "#454038", "#686056", "#8b8174", "#aea295", "#cbbfb3", "#e2dad0", "#f8f4ee"]
+      },
+      "sage": {
+        "role": "secondary",
+        "displayName": "Field Sage",
+        "canonical": "#667061",
+        "tonalRamp": ["#171b16", "#30372e", "#495346", "#63705f", "#7f8e7b", "#a0ad9d", "#c5cdc2", "#edf0eb"]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Ink Hairline",
+        "canonical": "rgba(29, 29, 26, 0.19)",
+        "tonalRamp": ["rgba(29,29,26,.72)", "rgba(29,29,26,.6)", "rgba(29,29,26,.48)", "rgba(29,29,26,.36)", "rgba(29,29,26,.26)", "rgba(29,29,26,.19)", "rgba(29,29,26,.11)", "rgba(29,29,26,.05)"]
+      },
+      "line-strong": {
+        "role": "neutral",
+        "displayName": "Strong Ink Hairline",
+        "canonical": "rgba(29, 29, 26, 0.42)",
+        "tonalRamp": ["rgba(29,29,26,.82)", "rgba(29,29,26,.7)", "rgba(29,29,26,.58)", "rgba(29,29,26,.48)", "rgba(29,29,26,.42)", "rgba(29,29,26,.3)", "rgba(29,29,26,.17)", "rgba(29,29,26,.07)"]
+      },
+      "focus-earth": {
+        "role": "secondary",
+        "displayName": "Earth Focus",
+        "canonical": "#805139",
+        "tonalRamp": ["#24150e", "#44291b", "#633d29", "#805139", "#9d6b50", "#bb8d73", "#d9b7a3", "#f4e7df"]
+      },
+      "clear-white": {
+        "role": "neutral",
+        "displayName": "Clear White",
+        "canonical": "#ffffff",
+        "tonalRamp": ["#262626", "#4b4b4b", "#707070", "#969696", "#b9b9b9", "#d6d6d6", "#ececec", "#ffffff"]
+      }
+    },
+    "typographyMeta": {
+      "hero-display": {
+        "displayName": "Hero Display",
+        "purpose": "The compact, line-broken opening question."
+      },
+      "route-display": {
+        "displayName": "Route Display",
+        "purpose": "Primary titles across discovery, search, destination, detail, and saved routes."
+      },
+      "section-headline": {
+        "displayName": "Section Headline",
+        "purpose": "Major collection and editorial-story introductions."
+      },
+      "card-title": {
+        "displayName": "Card Title",
+        "purpose": "Destination names and saved-place titles."
+      },
+      "body-large": {
+        "displayName": "Body Large",
+        "purpose": "Route introductions and longer destination or attraction reading."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Supporting descriptions and guidance."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Navigation, buttons, links, filters, and save actions."
+      },
+      "metadata": {
+        "displayName": "Metadata",
+        "purpose": "Coordinates, categories, ratings, status, attribution, and field captions."
+      }
+    },
+    "shadows": [
+      {
+        "name": "map-pin-lift",
+        "value": "0 8px 22px rgba(29,29,26,.2)",
+        "purpose": "Separates interactive numbered pins from the illustrative map."
+      },
+      {
+        "name": "map-context-lift",
+        "value": "0 8px 20px rgba(29,29,26,.16)",
+        "purpose": "Keeps the lodging marker readable over map geometry."
+      },
+      {
+        "name": "map-preview-lift",
+        "value": "0 16px 35px rgba(29,29,26,.16)",
+        "purpose": "Separates the selected-place summary from the map canvas."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-editorial",
+        "value": "cubic-bezier(.16, 1, .3, 1)",
+        "purpose": "Shared easing for page entry, image movement, underlines, and small spatial feedback."
+      },
+      {
+        "name": "page-enter",
+        "value": "520ms cubic-bezier(.16, 1, .3, 1)",
+        "purpose": "A short opacity and 8px vertical reveal when a route enters."
+      },
+      {
+        "name": "image-reveal",
+        "value": "800ms cubic-bezier(.16, 1, .3, 1)",
+        "purpose": "Staggered clip reveal for the three first-viewport photographs."
+      },
+      {
+        "name": "image-hover",
+        "value": "650ms cubic-bezier(.16, 1, .3, 1)",
+        "purpose": "Restrained image scale on destination and saved-place hover."
+      },
+      {
+        "name": "state",
+        "value": "180ms ease",
+        "purpose": "Compact color and selected-state feedback."
+      },
+      {
+        "name": "reduced-motion",
+        "value": ".01ms",
+        "purpose": "Effectively removes nonessential animation and transition duration when reduced motion is requested."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "mobile",
+        "value": "640px"
+      },
+      {
+        "name": "tablet",
+        "value": "900px"
+      },
+      {
+        "name": "layout-collapse",
+        "value": "1180px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The rectilinear continuation action used at decisive moments.",
+      "html": "<button class=\"ds-primary-button\">Continue exploring <svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" aria-hidden=\"true\"><path d=\"M7 17 17 7M8 7h9v9\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></button>",
+      "css": ".ds-primary-button{min-height:48px;display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:0 22px;border:1px solid var(--ink,#1d1d1a);border-radius:2px;color:var(--paper-light,#faf7f0);background:var(--ink,#1d1d1a);font:600 13px 'DM Sans',sans-serif;cursor:pointer;transition:color 200ms ease,background 200ms ease,transform 200ms cubic-bezier(.16,1,.3,1)}.ds-primary-button:hover{color:var(--ink,#1d1d1a);background:transparent;transform:translateY(-2px)}.ds-primary-button:active{transform:translateY(0)}.ds-primary-button:focus-visible{outline:2px solid var(--focus,#805139);outline-offset:4px}"
+    },
+    {
+      "name": "Search Field",
+      "kind": "input",
+      "refersTo": "search-field",
+      "description": "A large serif destination field defined by an ink underline rather than a box.",
+      "html": "<label class=\"ds-search\"><svg viewBox=\"0 0 24 24\" width=\"22\" height=\"22\" aria-hidden=\"true\"><circle cx=\"11\" cy=\"11\" r=\"6.5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"/><path d=\"m16 16 4 4\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\"/></svg><input value=\"New York City\" aria-label=\"Destination\" /></label>",
+      "css": ".ds-search{min-height:84px;display:flex;align-items:center;gap:18px;padding:0 4px;border-bottom:2px solid var(--ink,#1d1d1a);color:var(--ink,#1d1d1a);background:transparent}.ds-search input{width:100%;border:0;outline:0;color:inherit;background:transparent;font:500 clamp(2rem,4vw,4rem)/1 'Cormorant Garamond',Georgia,serif}.ds-search:focus-within{outline:2px solid var(--focus,#805139);outline-offset:4px}"
+    },
+    {
+      "name": "Navigation",
+      "kind": "nav",
+      "description": "A serif wordmark and restrained utility links divided from content by one hairline.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-brand\" href=\"#\">Where<i>To</i></a><span class=\"ds-nav-links\"><a class=\"ds-nav-active\" href=\"#\">Explore</a><a href=\"#\">Saved<sup>3</sup></a><a class=\"ds-nav-search\" href=\"#\" aria-label=\"Search\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" aria-hidden=\"true\"><circle cx=\"11\" cy=\"11\" r=\"6.5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"/><path d=\"m16 16 4 4\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\"/></svg></a></span></nav>",
+      "css": ".ds-nav{height:76px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line,rgba(29,29,26,.19));color:var(--ink,#1d1d1a)}.ds-nav a{color:inherit;text-decoration:none}.ds-brand{font:500 35px/1 'Cormorant Garamond',Georgia,serif;letter-spacing:-.035em}.ds-brand i{font-weight:400}.ds-nav-links{display:flex;align-items:center;gap:34px}.ds-nav-links>a{min-height:44px;position:relative;display:inline-flex;align-items:center;gap:5px;color:var(--muted,#6b665e);font:500 14px 'DM Sans',sans-serif}.ds-nav-links>a:after{content:'';height:1px;position:absolute;right:0;bottom:7px;left:0;transform:scaleX(0);transform-origin:right;background:var(--ink,#1d1d1a);transition:transform 240ms cubic-bezier(.16,1,.3,1)}.ds-nav-links>a:hover,.ds-nav-links>.ds-nav-active{color:var(--ink,#1d1d1a)}.ds-nav-links>a:hover:after,.ds-nav-links>.ds-nav-active:after{transform:scaleX(1);transform-origin:left}.ds-nav-links sup{min-width:18px;height:18px;display:grid;place-items:center;border-radius:50%;color:var(--paper,#f3efe6);background:var(--ink,#1d1d1a);font-size:10px}.ds-nav-search{width:44px;justify-content:center}.ds-nav a:focus-visible{outline:2px solid var(--focus,#805139);outline-offset:4px}"
+    },
+    {
+      "name": "Path Card",
+      "kind": "card",
+      "refersTo": "path-card",
+      "description": "A square, photograph-led route choice with a dark caption field and compact directional action.",
+      "html": "<a class=\"ds-path\" href=\"#\"><div class=\"ds-path-photo\" role=\"img\" aria-label=\"Destination photography\">Destination photograph</div><span class=\"ds-path-action\">Help me choose <svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" aria-hidden=\"true\"><path d=\"M7 17 17 7M8 7h9v9\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></span><div class=\"ds-path-copy\"><h2>Find somewhere new</h2><p>Start with a feeling, budget, or kind of trip.</p></div></a>",
+      "css": ".ds-path{width:min(100%,640px);min-height:440px;position:relative;display:block;overflow:hidden;color:#fff;background:var(--ink,#1d1d1a);text-decoration:none}.ds-path-photo{height:54%;display:grid;place-items:center;color:var(--muted,#6b665e);background:var(--stone,#d8d0c4);font:600 10px 'DM Sans',sans-serif;letter-spacing:.08em;text-transform:uppercase;transition:transform 700ms cubic-bezier(.16,1,.3,1)}.ds-path-copy{position:absolute;right:36px;bottom:36px;left:36px}.ds-path-copy h2{margin:0 0 8px;font:500 clamp(2.5rem,4vw,4.2rem)/.95 'Cormorant Garamond',Georgia,serif;letter-spacing:-.025em}.ds-path-copy p{max-width:44ch;margin:0;color:rgba(255,255,255,.78);font:400 14px/1.55 'DM Sans',sans-serif}.ds-path-action{position:absolute;z-index:2;top:24px;right:24px;display:inline-flex;align-items:center;gap:8px;padding:11px 13px;color:var(--ink,#1d1d1a);background:rgba(250,247,240,.94);font:600 12px 'DM Sans',sans-serif}.ds-path-action svg{transition:transform 220ms cubic-bezier(.16,1,.3,1)}.ds-path:hover .ds-path-photo{transform:scale(1.035)}.ds-path:hover .ds-path-action svg{transform:translate(4px,-4px)}.ds-path:focus-visible{outline:2px solid var(--focus,#805139);outline-offset:4px}"
+    },
+    {
+      "name": "Destination Card",
+      "kind": "card",
+      "refersTo": "destination-card",
+      "description": "A 4:5 place photograph followed by a hairline caption and restrained metadata.",
+      "html": "<article class=\"ds-destination\"><button class=\"ds-save\" aria-label=\"Save Tokyo\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" aria-hidden=\"true\"><path d=\"M12 20.4 4.5 13A5 5 0 0 1 11.6 6l.4.4.4-.4a5 5 0 0 1 7.1 7Z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linejoin=\"round\"/></svg></button><div class=\"ds-destination-photo\" role=\"img\" aria-label=\"Tokyo photography\">Destination photograph</div><div class=\"ds-destination-body\"><div><h3>Tokyo</h3><p>Japan</p></div><span>Food · Culture</span></div></article>",
+      "css": ".ds-destination{width:min(100%,360px);position:relative;color:var(--ink,#1d1d1a);font-family:'DM Sans',sans-serif}.ds-destination-photo{aspect-ratio:4/5;display:grid;place-items:center;overflow:hidden;color:var(--muted,#6b665e);background:var(--stone,#d8d0c4);font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;transition:transform 650ms cubic-bezier(.16,1,.3,1)}.ds-destination-body{min-height:100px;padding:16px 0 0;display:grid;grid-template-columns:1fr auto;gap:20px;border-top:1px solid var(--ink,#1d1d1a)}.ds-destination h3{margin:0;font:500 30px/1 'Cormorant Garamond',Georgia,serif;letter-spacing:-.02em;transition:transform 220ms cubic-bezier(.16,1,.3,1)}.ds-destination p{margin:6px 0 0;color:var(--muted,#6b665e);font-size:12px}.ds-destination-body>span{color:var(--muted,#6b665e);font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase}.ds-save{width:44px;height:44px;position:absolute;z-index:2;top:12px;right:12px;display:grid;place-items:center;border:0;border-radius:50%;color:var(--ink,#1d1d1a);background:rgba(250,247,240,.94);cursor:pointer;transition:background 200ms ease,transform 200ms cubic-bezier(.16,1,.3,1)}.ds-destination:hover .ds-destination-photo{transform:scale(1.028)}.ds-destination:hover h3{transform:translateX(4px)}.ds-save:hover{transform:translateY(-2px);background:#fff}.ds-save:focus-visible{outline:2px solid var(--focus,#805139);outline-offset:4px}"
+    },
+    {
+      "name": "Interest Choice",
+      "kind": "custom",
+      "description": "A table-like preference choice that inverts to ink instead of becoming a pill or card.",
+      "html": "<button class=\"ds-interest\" aria-pressed=\"true\"><span>Food & drink</span><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" aria-hidden=\"true\"><path d=\"m7 12 3 3 7-7\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></button>",
+      "css": ".ds-interest{width:260px;min-height:82px;display:flex;align-items:center;justify-content:space-between;padding:0 22px;border:1px solid var(--line-strong,rgba(29,29,26,.42));border-radius:0;color:var(--paper-light,#faf7f0);background:var(--ink,#1d1d1a);font:500 22px 'Cormorant Garamond',Georgia,serif;cursor:pointer;transition:color 180ms ease,background 180ms ease}.ds-interest svg{padding:3px;border:1px solid currentColor;border-radius:50%}.ds-interest:hover{background:#302f2a}.ds-interest:active{background:var(--paper-deep,#e8e0d4);color:var(--ink,#1d1d1a)}.ds-interest:focus-visible{outline:2px solid var(--focus,#805139);outline-offset:4px}"
+    },
+    {
+      "name": "Selected Attraction",
+      "kind": "card",
+      "refersTo": "attraction-card-selected",
+      "description": "A hairline-separated attraction row whose selected state is a deep-paper tonal shift.",
+      "html": "<article class=\"ds-attraction\"><div class=\"ds-attraction-photo\" role=\"img\" aria-label=\"Top of the Rock photography\">Place photograph</div><div class=\"ds-attraction-copy\"><small>OBSERVATION DECK · 4.7</small><h3>Top of the Rock</h3><p>City views framed by a landmark Art Deco tower.</p><span>Open now · 1.2 mi</span></div><button>Saved</button></article>",
+      "css": ".ds-attraction{width:min(100%,560px);min-height:190px;position:relative;display:grid;grid-template-columns:190px 1fr auto;border-top:1px solid var(--line,rgba(29,29,26,.19));border-bottom:1px solid var(--line,rgba(29,29,26,.19));color:var(--ink,#1d1d1a);background:var(--paper-deep,#e8e0d4);font-family:'DM Sans',sans-serif}.ds-attraction-photo{display:grid;place-items:center;color:var(--muted,#6b665e);background:var(--stone,#d8d0c4);font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase}.ds-attraction-copy{padding:20px 18px}.ds-attraction small{color:var(--muted,#6b665e);font-size:10px;letter-spacing:.05em}.ds-attraction h3{margin:17px 0 7px;font:500 28px 'Cormorant Garamond',Georgia,serif;letter-spacing:-.02em}.ds-attraction p{max-width:34ch;margin:0;color:var(--muted,#6b665e);font-size:12px;line-height:1.55}.ds-attraction-copy>span{display:block;margin-top:15px;color:var(--muted,#6b665e);font-size:10px}.ds-attraction>button{min-height:44px;align-self:start;margin:14px 12px 0 0;padding:0 12px;border:1px solid var(--line-strong,rgba(29,29,26,.42));border-radius:2px;color:var(--paper-light,#faf7f0);background:var(--ink,#1d1d1a);font:600 11px 'DM Sans',sans-serif;cursor:pointer}.ds-attraction>button:hover{color:var(--ink,#1d1d1a);background:transparent}.ds-attraction>button:focus-visible{outline:2px solid var(--focus,#805139);outline-offset:4px}"
+    },
+    {
+      "name": "Active Map Pin",
+      "kind": "custom",
+      "description": "The functional directional marker that mirrors the selected attraction row.",
+      "html": "<button class=\"ds-map-pin\" aria-label=\"Selected place 2\"><span>2</span></button>",
+      "css": ".ds-map-pin{width:38px;height:38px;display:grid;place-items:center;transform:rotate(-45deg) scale(1.18);border:3px solid var(--paper-light,#faf7f0);border-radius:50% 50% 50% 8px;color:#fff;background:#76523d;box-shadow:0 8px 22px rgba(29,29,26,.2);font:700 11px 'DM Sans',sans-serif;cursor:pointer;transition:transform 180ms cubic-bezier(.16,1,.3,1),background 180ms ease}.ds-map-pin span{transform:rotate(45deg)}.ds-map-pin:hover{transform:rotate(-45deg) scale(1.26)}.ds-map-pin:active{transform:rotate(-45deg) scale(1.14)}.ds-map-pin:focus-visible{outline:2px solid var(--focus,#805139);outline-offset:4px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Edited Travel Issue",
+    "overview": "WhereTo opens like a carefully art-directed travel magazine rather than a startup dashboard. Warm paper, charcoal type, and asymmetrical photography create calm editorial tension; a compact question and a contact-sheet hero let real places establish desire before the interface asks the traveler to choose a path. The system stays useful beneath that atmosphere. Discovery, destination search, saved places, attraction details, and the illustrative map all share the same flat paper-and-ink grammar. Cormorant Garamond carries place and emotion, DM Sans carries action and information, and hairline rules organize content without enclosing every idea in a card.",
+    "keyCharacteristics": [
+      "Warm ivory paper with deep ink and quiet earth neutrals.",
+      "Self-hosted Cormorant Garamond display type paired with self-hosted DM Sans utility text.",
+      "An asymmetrical, photography-led contact sheet in the first viewport.",
+      "Square, borderless image fields and hairline-divided content structures.",
+      "Photo-led path cards, destination cards, recommendations, and saved-place stories.",
+      "Subtle page and image reveals with complete reduced-motion support."
+    ],
+    "rules": [
+      {
+        "name": "The Paper Is the Canvas Rule",
+        "body": "Warm ivory remains visually continuous across a route; use borders, spacing, and photography before introducing another surface.",
+        "section": "colors"
+      },
+      {
+        "name": "The Photograph Owns the Color Rule",
+        "body": "Let destination imagery provide saturation. Interface hues stay muted and functional.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two Editorial Voices Rule",
+        "body": "Cormorant Garamond names places and frames stories; DM Sans explains, labels, and enables action.",
+        "section": "typography"
+      },
+      {
+        "name": "The Serif Earns Its Scale Rule",
+        "body": "Large serif type appears only where a destination, question, or story deserves focus. Do not use it as ornamental filler.",
+        "section": "typography"
+      },
+      {
+        "name": "The Contact Sheet Rule",
+        "body": "Asymmetry must still read as composed: one dominant photograph, clear supporting crops, shared edges, and narrow consistent gutters.",
+        "section": "layout"
+      },
+      {
+        "name": "The Story Before Inventory Rule",
+        "body": "Discovery surfaces lead with place, feeling, and the two traveler intents before exposing the larger destination set.",
+        "section": "layout"
+      },
+      {
+        "name": "The Mobile Continuity Rule",
+        "body": "Collapse the composition, not the story. Preserve the heading, all three hero images, both paths, useful state, and primary navigation.",
+        "section": "layout"
+      },
+      {
+        "name": "The Flat-by-Default Rule",
+        "body": "If a surface is readable with a hairline, tonal shift, or image edge, it does not receive a shadow.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Square-by-Default Rule",
+        "body": "Begin at 0px. Use 2px only to soften a control edge, 8px only where directional map geometry needs it, and 50% only for genuinely circular controls or markers.",
+        "section": "shapes"
+      },
+      {
+        "name": "The Shared Selection Rule",
+        "body": "Attraction rows, numbered pins, and the map preview must always describe the same selected place.",
+        "section": "components"
+      }
+    ],
+    "dos": [
+      "Do let real destination photography establish mood and provide the page's strongest color.",
+      "Do compose asymmetrical image groups with a clear dominant crop, aligned edges, and narrow consistent gutters.",
+      "Do use Cormorant Garamond for questions, place names, and editorial story headings, and DM Sans for everything operational.",
+      "Do use warm ivory as the continuous canvas and hairline rules as the primary grouping device.",
+      "Do preserve the square 0px geometry, using 2px controls and true circles only for the documented exceptions.",
+      "Do synchronize attraction-row, map-pin, and preview selection state.",
+      "Do keep page entry and image reveals subtle, and reduce all nonessential animation to effectively zero when reduced motion is requested.",
+      "Do preserve discovery, search, saved, attraction-detail, and illustrative-map flows as the visual system expands."
+    ],
+    "donts": [
+      "Don't use gradients, glass effects, neon color, or decorative geometric flourishes.",
+      "Don't turn every section into a card or every action into a pill.",
+      "Don't introduce generous rounding; 8px is a selective map-geometry exception, not a general card radius.",
+      "Don't add resting shadows to paths, destinations, recommendations, attraction rows, detail panels, or saved stories.",
+      "Don't replace photography with abstract illustration when a place image can carry the story.",
+      "Don't make filters, map metadata, or secondary facts compete with the editorial title and the route's next task.",
+      "Don't turn WhereTo into a booking dashboard or remove content and state to simplify mobile layouts."
+    ]
+  }
+}

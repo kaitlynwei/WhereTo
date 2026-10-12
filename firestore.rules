@@ -1,0 +1,272 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isOwner(userId) {
+      return request.auth != null && request.auth.uid == userId;
+    }
+
+    function validString(data, field, maxLength) {
+      return data[field] is string
+        && data[field].size() <= maxLength;
+    }
+
+    function validOptionalString(data, field, maxLength) {
+      return !(field in data) || validString(data, field, maxLength);
+    }
+
+    function validCoordinates(data) {
+      return !('coordinates' in data)
+        || (
+          data.coordinates is map
+          && data.coordinates.keys().hasOnly(['lat', 'lng'])
+          && (data.coordinates.lat is int || data.coordinates.lat is float)
+          && (data.coordinates.lng is int || data.coordinates.lng is float)
+          && data.coordinates.lat >= -90
+          && data.coordinates.lat <= 90
+          && data.coordinates.lng >= -180
+          && data.coordinates.lng <= 180
+        );
+    }
+
+    function validTripStay(data) {
+      return data.stay == null
+        || (
+          data.stay is map
+          && data.stay.keys().hasOnly([
+            'placeId', 'destinationId', 'destination', 'name', 'address', 'coordinates'
+          ])
+          && data.stay.placeId is string
+          && data.stay.placeId.size() <= 220
+          && data.stay.destinationId is string
+          && data.stay.destinationId.size() <= 120
+          && (!('destination' in data.stay) || data.stay.destination is string)
+          && (!('name' in data.stay) || data.stay.name is string)
+          && (!('address' in data.stay) || data.stay.address is string)
+          && (!('coordinates' in data.stay)
+            || (
+              data.stay.coordinates is map
+              && data.stay.coordinates.keys().hasOnly(['lat', 'lng'])
+              && (data.stay.coordinates.lat is int || data.stay.coordinates.lat is float)
+              && (data.stay.coordinates.lng is int || data.stay.coordinates.lng is float)
+              && data.stay.coordinates.lat >= -90
+              && data.stay.coordinates.lat <= 90
+              && data.stay.coordinates.lng >= -180
+              && data.stay.coordinates.lng <= 180
+            ))
+        );
+    }
+
+    function validTripItinerary(data) {
+      return data.itinerary == null
+        || (
+          data.itinerary is map
+          && data.itinerary.keys().hasOnly([
+            'version', 'title', 'summary', 'pace', 'dayCount', 'days', 'generatedAt'
+          ])
+          && data.itinerary.keys().hasAll([
+            'version', 'title', 'summary', 'pace', 'dayCount', 'days', 'generatedAt'
+          ])
+          && data.itinerary.version == 1
+          && data.itinerary.title is string
+          && data.itinerary.title.size() <= 140
+          && data.itinerary.summary is string
+          && data.itinerary.summary.size() <= 360
+          && data.itinerary.pace in ['relaxed', 'balanced', 'full']
+          && data.itinerary.dayCount is int
+          && data.itinerary.dayCount >= 1
+          && data.itinerary.dayCount <= 7
+          && data.itinerary.days is list
+          && data.itinerary.days.size() <= 7
+          && data.itinerary.generatedAt is string
+          && data.itinerary.generatedAt.size() <= 40
+        );
+    }
+
+    match /users/{userId} {
+      allow read, delete: if isOwner(userId);
+      allow create: if isOwner(userId)
+        && request.resource.data.keys().hasOnly([
+          'email', 'displayName', 'createdAt', 'updatedAt'
+        ])
+        && request.resource.data.keys().hasAll([
+          'email', 'displayName', 'createdAt', 'updatedAt'
+        ])
+        && request.resource.data.email == request.auth.token.email
+        && validString(request.resource.data, 'email', 254)
+        && validString(request.resource.data, 'displayName', 60)
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.updatedAt == request.time;
+
+      allow update: if isOwner(userId)
+        && request.resource.data.keys().hasOnly([
+          'email', 'displayName', 'createdAt', 'updatedAt'
+        ])
+        && request.resource.data.email == request.auth.token.email
+        && request.resource.data.email == resource.data.email
+        && request.resource.data.createdAt == resource.data.createdAt
+        && validString(request.resource.data, 'email', 254)
+        && validString(request.resource.data, 'displayName', 60)
+        && request.resource.data.updatedAt == request.time;
+
+      match /savedPlaces/{placeId} {
+        allow read, delete: if isOwner(userId);
+        allow create, update: if isOwner(userId)
+          && placeId.size() <= 220
+          && request.resource.data.id == placeId
+          && request.resource.data.savedAt == request.time
+          && (
+            (
+              request.resource.data.type == 'google-place'
+              && request.resource.data.keys().hasOnly([
+                'id', 'placeId', 'type', 'destination', 'destinationId', 'href', 'savedAt'
+              ])
+              && request.resource.data.keys().hasAll([
+                'id', 'placeId', 'type', 'destination', 'destinationId', 'href', 'savedAt'
+              ])
+              && request.resource.data.placeId == placeId
+              && validString(request.resource.data, 'destination', 120)
+              && validString(request.resource.data, 'destinationId', 120)
+              && validString(request.resource.data, 'href', 400)
+            )
+            ||
+            (
+              request.resource.data.type != 'google-place'
+              && request.resource.data.keys().hasOnly([
+                'id', 'type', 'name', 'destination', 'destinationId', 'country',
+                'category', 'categories', 'image', 'imageAlt', 'rating',
+                'priceLevel', 'address', 'coordinates', 'href', 'savedAt'
+              ])
+              && request.resource.data.keys().hasAll([
+                'id', 'type', 'name', 'destination', 'destinationId', 'href', 'savedAt'
+              ])
+              && request.resource.data.type == 'destination'
+              && validString(request.resource.data, 'name', 160)
+              && validString(request.resource.data, 'destination', 160)
+              && validString(request.resource.data, 'destinationId', 120)
+              && validOptionalString(request.resource.data, 'image', 1200)
+              && validString(request.resource.data, 'href', 400)
+              && validOptionalString(request.resource.data, 'country', 120)
+              && validOptionalString(request.resource.data, 'category', 80)
+              && validOptionalString(request.resource.data, 'imageAlt', 240)
+              && validOptionalString(request.resource.data, 'rating', 20)
+              && validOptionalString(request.resource.data, 'priceLevel', 40)
+              && validOptionalString(request.resource.data, 'address', 300)
+              && (!('categories' in request.resource.data)
+                || (request.resource.data.categories is list && request.resource.data.categories.size() <= 10))
+              && validCoordinates(request.resource.data)
+            )
+          );
+      }
+
+      match /stays/{destinationId} {
+        allow read, delete: if isOwner(userId);
+        allow create, update: if isOwner(userId)
+          && request.resource.data.keys().hasOnly([
+            'placeId', 'destinationId', 'updatedAt'
+          ])
+          && request.resource.data.keys().hasAll([
+            'placeId', 'destinationId', 'updatedAt'
+          ])
+          && request.resource.data.destinationId == destinationId
+          && validString(request.resource.data, 'destinationId', 120)
+          && validString(request.resource.data, 'placeId', 220)
+          && request.resource.data.updatedAt == request.time;
+      }
+
+      match /preferences/{preferenceId} {
+        allow read, delete: if isOwner(userId);
+        allow create, update: if isOwner(userId)
+          && preferenceId.size() <= 120
+          && request.resource.data.keys().hasOnly([
+            'id', 'type', 'signal', 'name', 'country', 'categories', 'updatedAt'
+          ])
+          && request.resource.data.keys().hasAll([
+            'id', 'type', 'signal', 'name', 'country', 'categories', 'updatedAt'
+          ])
+          && request.resource.data.id == preferenceId
+          && request.resource.data.type == 'destination'
+          && request.resource.data.signal in ['interested', 'not-interested']
+          && validString(request.resource.data, 'name', 160)
+          && validString(request.resource.data, 'country', 160)
+          && request.resource.data.categories is list
+          && request.resource.data.categories.size() <= 10
+          && request.resource.data.updatedAt == request.time;
+      }
+
+      match /trips/{tripId} {
+        allow read, delete: if isOwner(userId);
+        allow create: if isOwner(userId)
+          && tripId.size() <= 120
+          && request.resource.data.id == tripId
+          && request.resource.data.keys().hasOnly([
+            'id', 'title', 'status', 'destinations', 'dates', 'stay',
+            'preferences', 'itinerary', 'migrationVersion', 'createdAt', 'updatedAt'
+          ])
+          && request.resource.data.keys().hasAll([
+            'id', 'title', 'status', 'destinations', 'dates', 'stay',
+            'preferences', 'itinerary', 'migrationVersion', 'createdAt', 'updatedAt'
+          ])
+          && request.resource.data.status == 'active'
+          && validString(request.resource.data, 'title', 120)
+          && request.resource.data.destinations is list
+          && request.resource.data.destinations.size() <= 20
+          && request.resource.data.dates is map
+          && request.resource.data.preferences is map
+          && validTripStay(request.resource.data)
+          && validTripItinerary(request.resource.data)
+          && request.resource.data.createdAt == request.time
+          && request.resource.data.updatedAt == request.time;
+
+        allow update: if isOwner(userId)
+          && request.resource.data.id == tripId
+          && request.resource.data.keys().hasOnly([
+            'id', 'title', 'status', 'destinations', 'dates', 'stay',
+            'preferences', 'itinerary', 'migrationVersion', 'createdAt', 'updatedAt'
+          ])
+          && request.resource.data.status in ['active', 'archived']
+          && validString(request.resource.data, 'title', 120)
+          && request.resource.data.destinations is list
+          && request.resource.data.destinations.size() <= 20
+          && request.resource.data.dates is map
+          && request.resource.data.preferences is map
+          && validTripStay(request.resource.data)
+          && validTripItinerary(request.resource.data)
+          && request.resource.data.createdAt == resource.data.createdAt
+          && request.resource.data.updatedAt == request.time;
+
+        match /savedPlaces/{placeId} {
+          allow read, delete: if isOwner(userId);
+          allow create, update: if isOwner(userId)
+            && placeId.size() <= 220
+            && request.resource.data.id == placeId
+            && request.resource.data.savedAt == request.time
+            && request.resource.data.keys().hasOnly([
+              'id', 'placeId', 'type', 'name', 'destination', 'destinationId',
+              'country', 'category', 'categories', 'image', 'imageAlt', 'rating',
+              'priceLevel', 'address', 'coordinates', 'href', 'savedAt'
+            ])
+            && request.resource.data.keys().hasAll([
+              'id', 'type', 'destination', 'destinationId', 'href', 'savedAt'
+            ])
+            && request.resource.data.type in ['google-place', 'destination']
+            && validString(request.resource.data, 'destination', 160)
+            && validString(request.resource.data, 'destinationId', 120)
+            && validString(request.resource.data, 'href', 400)
+            && validOptionalString(request.resource.data, 'name', 160)
+            && validOptionalString(request.resource.data, 'country', 120)
+            && validOptionalString(request.resource.data, 'category', 80)
+            && validOptionalString(request.resource.data, 'image', 1200)
+            && validOptionalString(request.resource.data, 'imageAlt', 240)
+            && validOptionalString(request.resource.data, 'rating', 20)
+            && validOptionalString(request.resource.data, 'priceLevel', 40)
+            && validOptionalString(request.resource.data, 'address', 300)
+            && (!('placeId' in request.resource.data) || request.resource.data.placeId == placeId)
+            && (!('categories' in request.resource.data)
+              || (request.resource.data.categories is list && request.resource.data.categories.size() <= 10))
+            && validCoordinates(request.resource.data);
+        }
+      }
+    }
+  }
+}
