@@ -2,6 +2,26 @@
 
 WhereTo is a travel-discovery website for choosing a destination, finding a neighborhood, and discovering real places nearby. It uses React/Vite, Firebase Authentication and Firestore, Google Places/Maps, and a small Node API for OpenAI-powered recommendations.
 
+**Live demo:** [whereto-pcx4.onrender.com](https://whereto-pcx4.onrender.com)
+
+## What it does
+
+- Recommends a mix of popular and distinctive destinations, adapting the order to each user's interests.
+- Loads real attractions, restaurants, stores, ratings, photos, addresses, and opening information from Google Places.
+- Lets users create persistent trips with destinations, stays, saved places, and generated itineraries.
+- Ranks recommendations using interest match, quality, popularity, and proximity to the user's stay.
+- Uses an AI travel advisor for destination, neighborhood, and activity discovery while grounding place recommendations in real Google Place IDs.
+- Keeps profiles, trips, preferences, and saved places private to each Firebase account.
+
+## Main technologies
+
+- React and Vite
+- Node.js
+- Firebase Authentication and Cloud Firestore
+- Google Maps, Places, and Routes
+- OpenAI Responses API
+- Render
+
 ## Local setup
 
 1. Install dependencies with `npm install`.
@@ -73,16 +93,15 @@ Restrict the browser key to **Websites** and add local and production referrers.
 
 The built-in limiter is suitable for local development and a single server instance. A public multi-instance deployment should use the hosting provider's gateway rate limiting or a shared rate-limit store.
 
-## Deployment checklist
+## Deployment
 
-No deployment is performed by this repository.
+WhereTo is deployed as a Render web service. The Node server serves both the production Vite build and the `/api` routes from the same origin. Render rebuilds the service from the `main` branch, while production credentials are stored only in Render's environment settings.
 
-1. Choose a Node host, run `npm run build`, then use `npm start`; the server serves both the Vite `dist` output and `/api` from one origin.
-2. Add production environment variables in the host's secret/configuration settings.
+Before deploying another environment:
+
+1. Run `npm test` and `npm run build`.
+2. Add the required environment variables to the hosting platform's secret/configuration settings.
 3. Publish `firestore.rules`.
-4. Add the production hostname to Firebase Authorized domains and Google key website restrictions.
-5. Configure Google and OpenAI spending limits/alerts.
-6. Run `npm test` and `npm run build` in CI.
-7. Check `/api/health` after release.
-
-See `docs/itinerary-plan.md` for the intentionally deferred itinerary feature.
+4. Add the production hostname to Firebase Authorized domains and the Google key's website restrictions.
+5. Configure Google and OpenAI spending limits and alerts.
+6. Check `/api/health` after release.
