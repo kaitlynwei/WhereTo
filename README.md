@@ -68,7 +68,7 @@ users/{uid}/trips/current/savedPlaces/{placeId}
 users/{uid}/preferences/{destinationId}
 ```
 
-The current Trip document contains `destinations`, `dates`, `stay`, `preferences`, and an empty `itinerary` field reserved for later work. Its saved-place subcollection keeps stable Google Place IDs and is assembled into `trip.savedPlaces` in the app. On first load, existing records from the older `savedPlaces` and `stays` collections are copied into the current Trip.
+The current Trip document contains `destinations`, `dates`, `stay`, `preferences`, and `itinerary`. A new trip starts with `itinerary: null`; after the user generates an itinerary, the verified day-by-day plan is saved to that field and persists with the rest of the trip. Its saved-place subcollection keeps stable Google Place IDs and is assembled into `trip.savedPlaces` in the app. On first load, existing records from the older `savedPlaces` and `stays` collections are copied into the current Trip.
 
 Destination preference documents store an `interested` or `not-interested` signal plus a small category snapshot. They are used to reorder discovery results for that account; a “not interested” destination stays available but moves lower.
 
